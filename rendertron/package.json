@@ -1,5 +1,5 @@
 {
-  "name": "rendertron",
+  "name": "dynamicRender",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -41,6 +41,7 @@
     "react-dom": "^16.8.6",
     "react-router-config": "^5.0.0",
     "react-router-dom": "^5.0.0",
+    "rendertron-middleware": "^0.1.5",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.2",
@@ -54,7 +55,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "server": "node scripts/server.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "rendertron": "rendertron"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -119,6 +121,7 @@
     "@babel/core": "^7.2.2",
     "babel-loader": "^8.0.5",
     "fs-extra": "^7.0.1",
+    "rendertron": "^2.0.1",
     "resolve": "^1.10.0"
   }
 }

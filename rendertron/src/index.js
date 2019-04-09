@@ -8,14 +8,17 @@ import './index.css';
 import App from './App';
 import routes from './routes';
 
-const Context = createContext();
-
+export const {Provider, Consumer} = createContext();
 ReactDOM.render(
-    <Context.Consumer>
-        <BrowserRouter>
-            {renderRoutes(routes)}
-        </BrowserRouter>
-    </Context.Consumer>,
+    <Provider value="">
+        <Consumer>
+            {() => (
+                <BrowserRouter>
+                {renderRoutes(routes)}
+            </BrowserRouter>
+            )}
+        </Consumer>
+    </Provider>,
     // <App />,
     document.getElementById('root')
 );
