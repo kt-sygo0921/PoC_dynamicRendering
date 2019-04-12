@@ -10,13 +10,13 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Edit <code>src/About.js</code> and save to reload.
           </p>
           <Link
             className="App-link"
-            to={"/about"}
+            to={"/"}
           >
-            Aboutへ遷移
+            Appへ遷移
           </Link>
         </header>
       </div>
