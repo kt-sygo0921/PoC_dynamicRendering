@@ -43,6 +43,7 @@
     "react-router-dom": "^5.0.0",
     "rendertron-middleware": "^0.1.5",
     "sass-loader": "7.1.0",
+    "serialize-javascript": "^1.6.1",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.2",
     "url-loader": "1.1.2",
@@ -121,6 +122,8 @@
     "@babel/core": "^7.2.2",
     "babel-loader": "^8.0.5",
     "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11",
+    "redis": "^2.8.0",
     "rendertron": "^2.0.1",
     "resolve": "^1.10.0"
   }
