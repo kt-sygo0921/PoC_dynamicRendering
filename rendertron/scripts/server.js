@@ -14,7 +14,8 @@ app.set('view engine', 'html');
 // Add Rendertron middleware to send bot requests to Rendertron
 app.use('*', rendertron.makeMiddleware({
     proxyUrl: 'http://10.103.12.108:3000/render', // 実行中のRendertronプロキシサービスのベースURL。
-    userAgentPattern: BOT_UA_PATTERN
+    userAgentPattern: BOT_UA_PATTERN,
+    injectShadyDom: true
   }
 ));
 
