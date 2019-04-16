@@ -1,5 +1,15 @@
 "use strict";
+const redis = require('redis');
+const serialize = require('serialize-javascript');
 const fs = require('fs');
+
+// create and connect redis client to local instance.
+const client = redis.createClient('6379', '10.103.12.108');
+
+// Print redis errors to the console
+client.on('error', (err) => {
+  console.log("Error " + err);
+});
 
 /*
  * Copyright 2017 Google Inc. All rights reserved.
@@ -80,21 +90,47 @@ function makeMiddleware(options) {
             return;
         }
 
-        if (req.originalUrl === '/statuschange') {
-            return res.status(500).send({ error: 'Something failed!' });
-            // res.render('error', { error: err });
-        }
-        const incomingUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-        let renderUrl = proxyUrl + encodeURIComponent(incomingUrl);
-        if (injectShadyDom) {
-            renderUrl += '?wc-inject-shadydom=true';
-        }
-        request({ url: renderUrl, timeout }, (e) => {
-            if (e) {
-                console.error(`[rendertron middleware] ${e.code} error fetching ${renderUrl}`);
-                next();
+        client.get(req.originalUrl, (err, result) => {
+            if (req.originalUrl === '/statuschange') {
+                return res.status(500).send({ error: 'Something failed!' });
+                // res.render('error', { error: err });
             }
-        }).pipe(res);
+            // console.log(result);
+            // if(result) {
+            //     const resultJson = JSON.parse(result);
+            //     next();
+            //     // console.log(resultJson)
+            //     // return resultJson;
+            // }
+            const incomingUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+            let renderUrl = proxyUrl + encodeURIComponent(incomingUrl);
+            if (injectShadyDom) {
+                renderUrl += '?wc-inject-shadydom=true';
+            }
+            let getRes;
+            (async function() {
+                await (function() {
+                    return new Promise(resolve => {
+                        getRes = request({ url: renderUrl, timeout }, (e) => {
+                            if (e) {
+                                console.error(`[rendertron middleware] ${e.code} error fetching ${renderUrl}`);
+                                next();
+                            }
+                        }).pipe(res);
+                        return resolve();
+                    })
+                })()
+                await (function() {
+                    // const hoge = serialize(getRes);
+                    // console.log(hoge);
+                    return new Promise((resolve, reject) => {
+                        // client.set(req.originalUrl, getRes);
+                        return resolve();
+                    })
+                })()
+            })();
+            return getRes;
+        })
     };
 }
 exports.makeMiddleware = makeMiddleware;

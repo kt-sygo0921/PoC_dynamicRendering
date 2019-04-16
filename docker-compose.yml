@@ -1,0 +1,12 @@
+version: '3'
+services:
+  express:
+      build: ./rendertron
+      ports:
+        - "8080:8080"
+      volumes:
+        - ./rendertron:/home/app/project
+  rendertron:
+    build: ./rendertron_module
+    ports:
+      - "3000:3000"

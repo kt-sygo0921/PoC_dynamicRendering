@@ -1,6 +1,7 @@
 import Document from './_document';
 import App from './App';
 import About from './About';
+import StatusChange from './StatusChange';
 import Basic1_1 from './Basic1_1';
 import Basic1 from './Basic1';
 import Host2_1 from './Host2_1';
@@ -26,6 +27,11 @@ const Routes = [
                 path: '/about',
                 exact: true,
                 component: About,
+            },
+            {
+                path: '/statuschange',
+                exact: true,
+                component: StatusChange,
             },
             {
                 path: '/basic1_1',

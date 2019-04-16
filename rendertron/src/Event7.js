@@ -33,6 +33,7 @@ function (_HTMLElement) {
       });
       shadow.innerHTML = "\n      <style>\n        a{ font-size: 24px; }\n        :host{\n          display: block;\n          background: #fcc;\n        }\n      </style>\n      <a href=\"#\" class=\"customEvent\">\u30AB\u30B9\u30BF\u30E0\u30A4\u30D9\u30F3\u30C8\u9001\u4FE1</a>\n    ";
       this.shadowRoot.querySelector('a.customEvent').addEventListener('click', function (e) {
+        e.preventDefault();
         _this.dispatchEvent(new CustomEvent('click-link-custom', {
           composed: true,
           detail: {
